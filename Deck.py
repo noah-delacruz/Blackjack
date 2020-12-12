@@ -15,7 +15,7 @@ class Deck:
 
     # Creates all 52 combinations of cards for deck
     for suit in suits:
-      for rank in ranks:
+      for rank in values:
         self.deck.append(Card(suit, rank))
 
   # Randomly shuffles deck

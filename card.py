@@ -8,4 +8,4 @@ class Card:
 
   # How card is displayed when print is called
   def __str__(self):
-    return self.suit + self.value
+    return self.value + " of " + self.suit
