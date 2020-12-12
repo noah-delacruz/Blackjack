@@ -11,7 +11,7 @@ class Deck:
   def __init__(self):
     self.deck = []
     suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
-    values =  ["A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+    values =  ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 
     # Creates all 52 combinations of cards for deck
     for suit in suits:
