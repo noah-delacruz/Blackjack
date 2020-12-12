@@ -1,4 +1,4 @@
-# Class to reprsent individual cards
+# Class to represent individual cards
 class Card:
 
   # Constructor

@@ -1,5 +1,6 @@
 # Class to represent the Blackjack game and its logic
 
+# Inherit classes
 from Card import Card
 from Deck import Deck
 from Hand import Hand
@@ -11,9 +12,8 @@ class Game:
   def __init__(self):
     pass
   
+  # Function to run the whole Blackjack game
   def runGame(self):
-    keepPlaying = True
-
     # Create stats for player
     print("Welcome to Blackjack!")
     playerName = input("What is your name? ")
@@ -22,8 +22,11 @@ class Game:
     playerLosses = 0;
     ties = 0;
 
+    # Infinite loop to keep game going for as long as the player wants to
+    keepPlaying = True
     while keepPlaying:
       # Ask for bet amount
+      print("The maximum amount you can bet is ", cashAmount)
       betAmount = int(input("How much would you like to bet? "))
       cashAmount -= betAmount
 
@@ -35,7 +38,7 @@ class Game:
       self.playersHand = Hand(isDealer=False)
       self.dealersHand = Hand(isDealer=True)
 
-      # Deal 2 cards to dealer and player
+      # Deal 2 cards each to dealer and player
       for i in range(2):
         self.playersHand.addCard(self.deck.hit())
         self.dealersHand.addCard(self.deck.hit())
@@ -67,6 +70,7 @@ class Game:
             stopGame = True
         # Option if player chose to stand
         else:
+          # Display both hands and values
           playerHandValue = self.playersHand.getHandValue()
           dealerHandValue = self.dealersHand.getHandValue()
           print("Dealer's hand: ")
@@ -78,6 +82,7 @@ class Game:
             print(card)
           print("Your hand value: ", playerHandValue)
 
+          # Win, loss, or tie checker
           if playerHandValue > dealerHandValue:
             print("You win and the dealer loses!")
             playerWins += 1
@@ -104,6 +109,7 @@ class Game:
           
           stopGame = True
       
+      # Check if player wants to continue playing
       playAgain = input("Do you want to play again? (y/yes or n/no) ")
       playAgain = playAgain.lower()
       while playAgain not in ["y", "yes", "n", "no"]:
@@ -114,17 +120,3 @@ class Game:
       else:
         print("Game will now end. Thank you!")
         keepPlaying = False
-
-  # Checks if either dealer or player has blackjack
-  def checkForBlackjack(self):
-    if self.playersHand.getHandValue() == 21:
-      playerBlackjack = True
-    else:
-      playerBlackjack = False
-    
-    if(self.dealersHand.getHandValue() == 21):
-      dealerBlackjack = True
-    else:
-      dealerBlackjack = False
-
-    return playerBlackjack, dealerBlackjack
