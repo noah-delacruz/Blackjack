@@ -14,7 +14,19 @@ class Game:
   def runGame(self):
     keepPlaying = True
 
+    # Create stats for player
+    print("Welcome to Blackjack!")
+    playerName = input("What is your name? ")
+    cashAmount = int(input("How much money would you like to play with? "))
+    playerWins = 0;
+    playerLosses = 0;
+    ties = 0;
+
     while keepPlaying:
+      # Ask for bet amount
+      betAmount = int(input("How much would you like to bet? "))
+      cashAmount -= betAmount
+
       # Create deck and shuffle it
       self.deck = Deck()
       self.deck.shuffle()
@@ -44,10 +56,26 @@ class Game:
           stopGame = True
           if playerHasBlackjack and dealerHasBlackjack:
             print("Both players have blackjack and thus there is a draw!")
+            ties += 1
+            cashAmount += betAmount
           elif playerHasBlackjack:
             print("You have blackjack! You win and the dealer loses!")
+            playerWins += 1
+            cashAmount += betAmount * 2
           elif dealerHasBlackjack:
             print("Dealer has blackjack! You lose and the dealer wins!")
+            playerLosses += 1
+          # Print stats
+          print(playerName)
+          print("Wins: ", playerWins)
+          print("Losses: ", playerLosses)
+          print("Ties: ", ties)
+          print("Cash: ", cashAmount)
+          print()
+          print("Dealer")
+          print("Wins: ", playerLosses)
+          print("Losses: ", playerWins)
+          print("Ties: ", ties)
           continue
 
         # Ask player if they want to hit or stand
@@ -75,10 +103,27 @@ class Game:
 
           if playerHandValue > dealerHandValue:
             print("You win and the dealer loses!")
+            playerWins += 1
+            cashAmount += betAmount * 2
           elif playerHandValue == dealerHandValue:
             print("Tie!")
+            ties += 1
+            cashAmount += betAmount
           else:
             print("You lose and the dealer wins!")
+            playerLosses += 1
+          
+          # Print stats
+          print(playerName)
+          print("Wins: ", playerWins)
+          print("Losses: ", playerLosses)
+          print("Ties: ", ties)
+          print("Cash: ", cashAmount)
+          print()
+          print("Dealer")
+          print("Wins: ", playerLosses)
+          print("Losses: ", playerWins)
+          print("Ties: ", ties)
           
           stopGame = True
       
