@@ -50,34 +50,6 @@ class Game:
       # Loop for players turn
       stopGame = False
       while not stopGame:
-        # Check if either dealer or player has blackjack
-        playerHasBlackjack, dealerHasBlackjack = self.checkForBlackjack()
-        if playerHasBlackjack or dealerHasBlackjack:
-          stopGame = True
-          if playerHasBlackjack and dealerHasBlackjack:
-            print("Both players have blackjack and thus there is a draw!")
-            ties += 1
-            cashAmount += betAmount
-          elif playerHasBlackjack:
-            print("You have blackjack! You win and the dealer loses!")
-            playerWins += 1
-            cashAmount += betAmount * 2
-          elif dealerHasBlackjack:
-            print("Dealer has blackjack! You lose and the dealer wins!")
-            playerLosses += 1
-          # Print stats
-          print(playerName)
-          print("Wins: ", playerWins)
-          print("Losses: ", playerLosses)
-          print("Ties: ", ties)
-          print("Cash: ", cashAmount)
-          print()
-          print("Dealer")
-          print("Wins: ", playerLosses)
-          print("Losses: ", playerWins)
-          print("Ties: ", ties)
-          continue
-
         # Ask player if they want to hit or stand
         choice = input("Do you want to hit or stand? (h/hit or s/stand) ")
         choice = choice.lower()
@@ -97,8 +69,13 @@ class Game:
         else:
           playerHandValue = self.playersHand.getHandValue()
           dealerHandValue = self.dealersHand.getHandValue()
-
+          print("Dealer's hand: ")
+          for card in self.dealersHand.cards:
+            print(card)
           print("Dealer's hand value: ", dealerHandValue)
+          print("Your hand: ")
+          for card in self.playersHand.cards:
+            print(card)
           print("Your hand value: ", playerHandValue)
 
           if playerHandValue > dealerHandValue:
